@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from 'axios'
 import { useHistory } from "react-router-dom";
+import CONSTANTS from "../constants";
+
 const initialState = {
   username: '',
   email: '',
@@ -48,7 +50,7 @@ function Signup() {
     }
     user.genre = user.genres;
     try {
-      const resp = await axios.post('/api/users/', user);
+      const resp = await axios.post(CONSTANTS.path + '/users/', user);
       if(resp.status === 201) {
         alert('Saved successfully')
         history.push('/')

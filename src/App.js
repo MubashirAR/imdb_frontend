@@ -12,20 +12,27 @@ import { AuthContext } from './context/auth';
 import { useEffect, useState } from 'react';
 
 function App() {
-  const existingTokens = JSON.parse(localStorage.getItem("tokens"));
+  const existingTokens = JSON.parse(localStorage.getItem("tokens") || '{}');
+  const existingIsAdmin = localStorage.getItem("isAdmin");
   const [authTokens, setAuthTokens] = useState(existingTokens);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(existingIsAdmin);
   let history = useHistory()
   const setTokens = (data) => {
     localStorage.setItem("tokens", JSON.stringify(data));
     setAuthTokens(data);
   }
   function logOut() {
+    localStorage.setItem("tokens", '');
+    localStorage.setItem("isAdmin", '');
     setAuthTokens();
+  }
+  const isAdminProxy = isUserAdmin => {
+    localStorage.setItem("isAdmin", isUserAdmin)
+    setIsAdmin(isUserAdmin)
   }
   return (
     <div className="App">
-      <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens, setIsAdmin, isAdmin }}>
+      <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens, setIsAdmin: isAdminProxy, isAdmin }}>
         <Router basename={'static'}>
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
               <Link to="/" className="navbar-brand">
@@ -38,7 +45,7 @@ function App() {
                   </li>
                 </Link>
                 
-                {authTokens 
+                {authTokens && authTokens.access_token
                 ? (
                     <>
                     {

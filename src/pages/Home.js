@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import CONSTANTS from "../constants";
 
 
 function Home(props) {
@@ -16,11 +17,11 @@ function Home(props) {
   }, [searchVal])
 
   const getAllMovies = async () => {
-    let {data: movies} = await axios.get(`/api/movies/all?page=${page}`)
+    let {data: movies} = await axios.get(`${CONSTANTS.path}/movies/all?page=${page}`)
     setMovies(movies)
   }
   const searchMovies = async () => {
-    let {data: movies} = await axios.get(`/api/movies/search?page=${page}&query=${searchVal}`)
+    let {data: movies} = await axios.get(`${CONSTANTS.path}/movies/search?page=${page}&query=${searchVal}`)
     setMovies(movies)
   }
 

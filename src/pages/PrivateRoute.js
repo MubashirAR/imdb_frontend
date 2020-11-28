@@ -8,7 +8,7 @@ function PrivateRoute({ component: Component, ...rest }) {
     <Route
       {...rest}
       render={props =>
-        authTokens && isAdmin ? (
+        authTokens && authTokens.access_token && isAdmin ? (
           <Component {...props} />
         ) : (
           <Redirect to="/" />

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import axios from 'axios';
 import { useAuth } from "../context/auth";
+import CONSTANTS from "../constants";
 
 function Login() {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -13,7 +14,7 @@ function Login() {
 
   useEffect(async () => {
     const { token_type, access_token } = authTokens || {};
-    let user = await axios.get('/api/users/me',{
+    let user = await axios.get(CONSTANTS.path + '/users/me',{
       headers: {
           'Authorization': ` ${token_type} ${access_token}`
       }
@@ -30,7 +31,7 @@ function Login() {
     bodyFormData.append('username', userName);
     bodyFormData.append('password', password);
     try {
-      let result = await axios.post("/api/token", bodyFormData, {
+      let result = await axios.post(CONSTANTS.path + "/token", bodyFormData, {
           headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
           }

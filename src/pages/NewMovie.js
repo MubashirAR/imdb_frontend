@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../context/auth";
 import { useHistory } from "react-router-dom";
+import CONSTANTS from "../constants";
 
 const initialState = {
   name: '',
@@ -23,7 +24,7 @@ function NewMovie(props) {
       movie.genre = movie.genres;
       const { token_type, access_token } = authTokens || {};
       try {
-        const resp = await axios.post('/api/movie/', movie, {
+        const resp = await axios.post(CONSTANTS.path + '/movie/', movie, {
           headers: {
               'Authorization': ` ${token_type} ${access_token}`
           }
