@@ -13,7 +13,7 @@ function Login() {
 
   useEffect(async () => {
     const { token_type, access_token } = authTokens || {};
-    let user = await axios.get('/users/me',{
+    let user = await axios.get('/api/users/me',{
       headers: {
           'Authorization': ` ${token_type} ${access_token}`
       }
@@ -30,7 +30,7 @@ function Login() {
     bodyFormData.append('username', userName);
     bodyFormData.append('password', password);
     try {
-      let result = await axios.post("/token", bodyFormData, {
+      let result = await axios.post("/api/token", bodyFormData, {
           headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
           }

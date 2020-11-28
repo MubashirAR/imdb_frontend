@@ -13,7 +13,7 @@ function Admin(props) {
   }, [0]);
 
   const getAllMovies = async () => {
-    let {data: movies} = await axios.get('/movies/all')
+    let {data: movies} = await axios.get('/api/movies/all')
     console.log({movies})
     setMovies(movies)
     let editData = {}
@@ -30,7 +30,7 @@ function Admin(props) {
   };
   const updateMovie = async movie => {
     const { token_type, access_token } = authTokens || {};
-    const resp = await axios.put('/movie/', movie, {
+    const resp = await axios.put('/api/movie/', movie, {
       headers: {
         'Authorization': ` ${token_type} ${access_token}`
       }

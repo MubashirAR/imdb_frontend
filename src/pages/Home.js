@@ -16,11 +16,11 @@ function Home(props) {
   }, [searchVal])
 
   const getAllMovies = async () => {
-    let {data: movies} = await axios.get(`/movies/all?page=${page}`)
+    let {data: movies} = await axios.get(`/api/movies/all?page=${page}`)
     setMovies(movies)
   }
   const searchMovies = async () => {
-    let {data: movies} = await axios.get(`/movies/search?page=${page}&query=${searchVal}`)
+    let {data: movies} = await axios.get(`/api/movies/search?page=${page}&query=${searchVal}`)
     setMovies(movies)
   }
 

@@ -48,7 +48,7 @@ function Signup() {
     }
     user.genre = user.genres;
     try {
-      const resp = await axios.post('/users/', user);
+      const resp = await axios.post('/api/users/', user);
       if(resp.status === 201) {
         alert('Saved successfully')
         history.push('/')

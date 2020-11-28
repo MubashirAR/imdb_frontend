@@ -23,7 +23,7 @@ function NewMovie(props) {
       movie.genre = movie.genres;
       const { token_type, access_token } = authTokens || {};
       try {
-        const resp = await axios.post('/movie/', movie, {
+        const resp = await axios.post('/api/movie/', movie, {
           headers: {
               'Authorization': ` ${token_type} ${access_token}`
           }
